@@ -1,30 +1,48 @@
-import React, {useState} from 'react';
+import React, { useState } from "react";
+import { Button, Menu, MenuItem } from "@mui/material";
 import { FaChevronDown } from "react-icons/fa";
+import { Link } from "react-router-dom";
+
+const kategorien = ["Alles", "Technik", "Kunst", "Musik", "Sport"];
 
 const Navbar = () => {
-    const kategorien = ["Alles", "Technik", "Kunst", "Musik", "Sport"];
+    const [anchorEl, setAnchorEl] = useState(null);
 
-    const [istOffen, setIstOffen] = useState(false);
+    const handleOpen = (event) => setAnchorEl(event.currentTarget);
 
-    const dropdownUmschalten = () => setIstOffen(!istOffen);
+    const handleClose = () => setAnchorEl(null);
 
     return (
-        <div className="dropdown">
-            <button onClick={dropdownUmschalten} className="dropbtn">
-                Kategorien <FaChevronDown style={{ marginLeft: "5px" }} />
-            </button>
-            {istOffen && (
-                <ul className="dropdown-content">
-                    {kategorien.map((kat, idx) => (
-                        <li key={idx} className="dropdown-item">
-                            {kat}
-                        </li>
-                    ))}
-                </ul>
-            )
-            }
+        <>
+            <Button
+                aria-controls={anchorEl ? "kategorien-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={anchorEl ? "true" : undefined}
+                onClick={handleOpen}
+                color="inherit"
+                endIcon={<FaChevronDown />}
+            >
+                Kategorien
+            </Button>
 
-        </div>
+            <Menu
+                id="kategorien-menu"
+                anchorEl={anchorEl}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+            >
+                {kategorien.map((kat, idx) => (
+                    <MenuItem
+                        key={idx}
+                        component={Link}
+                        to={`/?category=${kat}`}
+                        onClick={handleClose}
+                    >
+                        {kat}
+                    </MenuItem>
+                ))}
+            </Menu>
+        </>
     );
 };
 

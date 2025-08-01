@@ -1,0 +1,12 @@
+.post-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.post-list .MuiCard-root {
+    width: 300px;
+    flex: 0 0 auto;
+}
