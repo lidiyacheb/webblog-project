@@ -8,7 +8,6 @@ function App() {
   return (
     <>
         console.log('Hello Webpost Blog!')
-        console.log('Hello Aya!')
     </>
   )
 }
